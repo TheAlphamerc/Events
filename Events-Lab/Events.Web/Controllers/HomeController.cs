@@ -25,7 +25,7 @@ namespace Events.Web.Controllers
                             PassedEvents = passedEvents
                        });
         }
-        public ActionResult EventDetailById(int id)
+        public ActionResult EventDetailsById(int id)
         {
             var currentUserId = this.User.Identity.GetUserId();
             var isAdmin = this.IsAdmin();
@@ -35,7 +35,7 @@ namespace Events.Web.Controllers
                                     .Select(EventDetailsViewModel.ViewModel)
                                     .FirstOrDefault();
             var isOwner = (eventDetails != null && eventDetails.AuthorId != null && eventDetails.AuthorId == currentUserId);
-            this.ViewBag.CnEdit = isOwner || isAdmin;
+            this.ViewBag.CanEdit = isOwner || isAdmin;
             return this.PartialView("_EventDetails",eventDetails);
         }
 

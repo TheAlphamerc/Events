@@ -17,6 +17,14 @@
     {
         <div class="col-md-4 col-sm-6 col-xs-12">NO Events</div>
     }
+    @if (Model.PassedEvents.Any())
+    {
+        @Html.DisplayFor(x => x.PassedEvents)
+    }
+    else
+    {
+        <div class="col-md-4 col-sm-6 col-xs-12">NO Events</div>
+    }
 </div>
 
 @section scripts{

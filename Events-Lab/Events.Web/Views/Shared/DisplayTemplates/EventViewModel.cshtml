@@ -26,12 +26,11 @@
         }
 
         <div id="event-details-@Model.Id">
-            @Ajax.ActionLink("View Details >>","EventDetailsById","Home",
-                   new { id = Model.Id },
+            @Ajax.ActionLink("View Details >>","EventDetailsById","Home", new { id = Model.Id },
                    new AjaxOptions
                    {
                        InsertionMode = InsertionMode.Replace,
-                       UpdateTargetId = "event-details-" + Model.Id
+                       UpdateTargetId = "event-details-"+Model.Id
                    } , new {@class = "btn btn-default"})
         </div>
     </div>
