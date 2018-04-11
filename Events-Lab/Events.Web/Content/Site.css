@@ -22,3 +22,18 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.event-group-heading{
+    width :100%;
+    background:#EEE;
+    padding : 5px,10px;
+}
+
+.event-box{
+    width:100%;
+    background:#f5f5f5;
+    border-radius:5px;
+    padding:10px;
+    margin:5px,0px,5px,0px;
+    word-wrap:break-word;
+}

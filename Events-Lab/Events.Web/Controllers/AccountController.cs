@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Events.Web.Models;
+using Events.Data;
+
 
 namespace Events.Web.Controllers
 {
@@ -151,7 +153,11 @@ namespace Events.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                { UserName = model.Email,
+                  Email = model.Email,
+                  Fullname  = model.FullName
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
