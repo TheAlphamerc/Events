@@ -1,13 +1,15 @@
-﻿
-<!DOCTYPE html>
+﻿@model Events.Web.Models.UpcomingPassedEventsViewModel
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>My</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+@{
+    ViewBag.Title = "My Events";
+}
+
+
+
+@{
+    @Html.Partial("_Events")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/ajax")
+}

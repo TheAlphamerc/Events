@@ -269,6 +269,7 @@
     <Content Include="Views\Home\_EventDetails.cshtml" />
     <Content Include="Views\Events\My.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Shared\_Events.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

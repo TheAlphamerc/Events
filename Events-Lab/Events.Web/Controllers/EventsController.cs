@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Events.Web.Controllers
 {
+    [Authorize]
     public class EventsController : BaseController
     {
         // GET: Events
@@ -44,7 +45,19 @@ namespace Events.Web.Controllers
 
         public ActionResult My()
         {
-            return View();
+            string currentUserId = this.User.Identity.GetUserId();
+            var events = this.db.Events
+                             .Where(e => e.AuthorId == currentUserId)
+                             .OrderBy(e => e.StartDateTIme)
+                             .Select(EventViewModel.viewModel);
+            var upcomingEvents = events.Where(e => e.StartDateTIme > DateTime.Now);
+            var passedEvents = events.Where(e => e.StartDateTIme <= DateTime.Now);
+
+            return View(new UpcomingPassedEventsViewModel()
+            { 
+                UpcomingEvents = upcomingEvents,
+                PassedEvents = passedEvents
+            });
         }
     }
 }
