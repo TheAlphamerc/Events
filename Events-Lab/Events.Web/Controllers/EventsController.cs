@@ -59,5 +59,57 @@ namespace Events.Web.Controllers
                 PassedEvents = passedEvents
             });
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var eventToEdit = this.LoadEvent(id);
+            if (eventToEdit == null)
+            {
+                this.AddNotification("Cannot edit event #" + id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+            var model = EventInputModel.CreateFromEvent(eventToEdit);
+            
+            return this.View(model);
+        }
+
+        private Event LoadEvent(int id)
+        {
+            var currentId = this.User.Identity.GetUserId();
+            var isAdmin = this.IsAdmin();
+            var eventToEdit = this.db.Events
+                                  .Where(e => e.Id == id)
+                                   .FirstOrDefault(e => e.AuthorId == currentId || isAdmin);
+            return eventToEdit;
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, EventInputModel model)
+        {
+            var eventToEdit = this.LoadEvent(id);
+            if (eventToEdit == null)
+            {
+                this.AddNotification("Cannot edit event #" + id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+            //  var model = EventInputModel.CreateFromEvent(eventToEdit);
+            if(model != null && this.ModelState.IsValid)
+            {
+                eventToEdit.Title = model.Title;
+                eventToEdit.StartDateTIme = model.StartDateTIme;
+                eventToEdit.Duration = model.Duration;
+                eventToEdit.Description = model.Description;
+                eventToEdit.Location = model.Location;
+                eventToEdit.Ispublic = model.Ispublic;
+
+                this.db.SaveChanges();
+                this.AddNotification("Event edited.", NotificationType.INFO);
+                return this.RedirectToAction("My");
+            }
+            return this.View(model);
+        }
     }
+
+   
 }

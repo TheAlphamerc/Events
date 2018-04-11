@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Events.Data;
 
 namespace Events.Web.Models
 {
@@ -31,6 +32,20 @@ namespace Events.Web.Models
 
         [Display(Name = "Is Public?")]
         public bool Ispublic { get; set; }
+
+        public static EventInputModel CreateFromEvent(Event eventToEdit)
+        {
+            EventInputModel eventInputModel = new EventInputModel();
+            eventInputModel.Title = eventToEdit.Title;
+            eventInputModel.StartDateTIme = eventToEdit.StartDateTIme;
+            eventInputModel.Duration = eventToEdit.Duration;
+            eventInputModel.Description = eventToEdit.Description;
+            eventInputModel.Location = eventToEdit.Location;
+            eventInputModel.Ispublic = eventToEdit.Ispublic;
+
+
+            return eventInputModel;
+        }
 
     }
 }
