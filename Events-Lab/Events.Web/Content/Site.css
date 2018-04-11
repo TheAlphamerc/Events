@@ -37,3 +37,6 @@ textarea {
     margin:5px,0px,5px,0px;
     word-wrap:break-word;
 }
+.alert{
+    margin-top:10px;
+}

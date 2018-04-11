@@ -1,4 +1,5 @@
 ﻿using Events.Data;
+using Events.Web.Extensions;
 using Events.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
@@ -30,13 +31,12 @@ namespace Events.Web.Controllers
                     Title = model.Title,
                     StartDateTIme = model.StartDateTIme,
                     Duration = model.Duration,
-                    // Description = model.Description,
                     Location = model.Location,
-                    //  Ispublic = model.IsPublic
 
                 };
                 this.db.Events.Add(e);
                 db.SaveChanges();
+                this.AddNotification("Events created", NotificationType.INFO);
                 return this.RedirectToAction("My");
             }
             return this.View(model);
