@@ -266,6 +266,7 @@
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EventViewModel.cshtml" />
     <Content Include="Views\Home\_EventDetails.cshtml" />
+    <Content Include="Views\Events\My.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

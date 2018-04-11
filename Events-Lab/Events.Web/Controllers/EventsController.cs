@@ -12,7 +12,7 @@ namespace Events.Web.Controllers
     public class EventsController : BaseController
     {
         // GET: Events
-        public ActionResult Index()
+        public ActionResult Create()
         {
             return View();
         }
@@ -20,35 +20,31 @@ namespace Events.Web.Controllers
         // POST: Events/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EventViewModel model)
+        public ActionResult Create(EventInputModel model)
         {
-            try
+            if (model != null && this.ModelState.IsValid)
             {
-               if(model != null && this.ModelState.IsValid)
+                var e = new Event()
                 {
-                    var e = new Event()
-                    {
-                        AuthorId = this.User.Identity.GetUserId(),
-                        Title = model.Title,
-                        StartDateTIme = model.StartDateTIme,
-                        Duration = model.Duration,
-                       // Description = model.Description,
-                        Location = model.Location,
-                      //  Ispublic = model.IsPublic
-                        
-                    };
-                    this.db.Events.Add(e);
-                    db.SaveChanges();
-                }
+                    AuthorId = this.User.Identity.GetUserId(),
+                    Title = model.Title,
+                    StartDateTIme = model.StartDateTIme,
+                    Duration = model.Duration,
+                    // Description = model.Description,
+                    Location = model.Location,
+                    //  Ispublic = model.IsPublic
 
-                return RedirectToAction("Index");
+                };
+                this.db.Events.Add(e);
+                db.SaveChanges();
+                return this.RedirectToAction("My");
             }
-            catch
-            {
-                return View();
-            }
+            return this.View(model);
         }
 
-      
+        public ActionResult My()
+        {
+            return View();
+        }
     }
 }

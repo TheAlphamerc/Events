@@ -11,7 +11,7 @@ namespace Events.Web.Models
       //  public int Id { get; set; }
 
         [Required(ErrorMessage ="Event Title is required.")]
-        [MaxLength(200,ErrorMessage ="The {0} must be between {2} and {1} character long.")]
+        [StringLength(200,ErrorMessage ="The {0} must be between {2} and {1} character long.", MinimumLength = 1)]
         [Display(Name = "Title *")]
         public string Title { get; set; }
 
