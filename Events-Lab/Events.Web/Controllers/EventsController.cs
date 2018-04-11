@@ -1,4 +1,5 @@
 ﻿using Events.Data;
+using Events.Web.Extensions;
 using Events.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
@@ -37,6 +38,7 @@ namespace Events.Web.Controllers
                 };
                 this.db.Events.Add(e);
                 db.SaveChanges();
+                this.AddNotification("Event Created.", NotificationType.INFO);
                 return this.RedirectToAction("My");
             }
             return this.View(model);

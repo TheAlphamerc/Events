@@ -58,7 +58,8 @@
             @Html.LabelFor(model => model.Ispublic, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.Ispublic)
+                    @*@Html.EditorFor(model => model.Ispublic)*@
+                    @Html.CheckBoxFor(model => model.Ispublic, htmlAttributes: new { @checked = "true"})
                     @Html.ValidationMessageFor(model => model.Ispublic, "", new { @class = "text-danger" })
                 </div>
             </div>
