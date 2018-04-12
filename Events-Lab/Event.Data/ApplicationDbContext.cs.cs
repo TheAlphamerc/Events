@@ -23,6 +23,8 @@ namespace Events.Data
             return new ApplicationDbContext();
         }
 
-    //    public System.Data.Entity.DbSet<Events.Web.Models.EventDetailsViewModel> EventDetailsViewModels { get; set; }
+      //  object placeHolderVariable;
+
+        //    public System.Data.Entity.DbSet<Events.Web.Models.EventDetailsViewModel> EventDetailsViewModels { get; set; }
     }
 }

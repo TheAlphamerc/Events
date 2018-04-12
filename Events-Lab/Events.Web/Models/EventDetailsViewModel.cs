@@ -15,6 +15,8 @@ namespace Events.Web.Models
 
         public string AuthorId { get; set; }
 
+      //public virtual Comment Newcomment { get; set; }
+
         public IEnumerable<CommentViewModel> Comments { get; set; }
 
         public static Expression<Func<Event, EventDetailsViewModel>> ViewModel

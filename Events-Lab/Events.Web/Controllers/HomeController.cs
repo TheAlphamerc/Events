@@ -1,4 +1,6 @@
-﻿using Events.Web.Models;
+﻿using Events.Data;
+using Events.Web.Extensions;
+using Events.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -39,6 +41,32 @@ namespace Events.Web.Controllers
             return this.PartialView("_EventDetails",eventDetails);
         }
 
-      
+        public JsonResult NewComment(Comment C)
+        {
+            ApplicationDbContext dba = new ApplicationDbContext();
+
+           bool status =false;
+            if (C != null)
+            { Comment comment = new Comment()
+            {
+                Author = C.Author,
+                Text = C.Text,
+                Date = DateTime.Now,
+                EventId = 1
+                
+                    
+                    
+                };
+                dba.SaveChanges();
+                //Comments.SaveChanges();
+                this.db.SaveChanges();
+                this.AddNotification("Comment added.", NotificationType.SUCCESS);
+                status = true;
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+
+
     }
 }

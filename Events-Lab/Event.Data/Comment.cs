@@ -9,6 +9,9 @@ namespace Events.Data
         public Comment()
         {
             this.Date = DateTime.Now;
+            this.EventId = 0;
+
+            //this.EventId = Event.Id;
         }
 
         public int Id { get; set; }

@@ -272,6 +272,9 @@
     <Content Include="Views\Shared\_Events.cshtml" />
     <Content Include="Views\Events\_EventEditorForm.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\Delete.cshtml" />
+    <Content Include="Views\Events\_delete.cshtml" />
+    <Content Include="Views\Home\_CommentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

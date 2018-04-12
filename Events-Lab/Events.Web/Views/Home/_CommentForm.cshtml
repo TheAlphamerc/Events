@@ -1,0 +1,78 @@
+﻿@*@model Events.Data.Comment*@
+
+@model Events.Web.Models.EventDetailsViewModel
+@{
+    var comment = "";
+}
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()*@
+
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="form-group">
+        <div class="col-md-9">
+
+            <input id="Text" type="text" value="" placeholder="New Comment" class="form-control" />
+            @Html.EditorFor(model => model.AuthorId, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @id = "Author" } })
+            @*@Html.EditorFor(model => model., new { htmlAttributes = new { @class = "form-control", @style = "display:none", @id = "Author" } })*@
+
+
+        </div>
+        <div class="col-md-3">
+            <button id="submit" class="form-control col-md-2 btn btn-info">Add</button>
+
+            @*@Html.ActionLink("Add", "NewComment", "Home", new { id = Model.Id }, new { @class = "btn btn-info",@Placeholder="New Comment" })*@
+
+        </div>
+    </div>
+</div>
+@*}*@
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script type="text/javascript">
+
+
+
+
+    $(document).ready(function () {               // ADD NEW COMMENT
+        $("#submit").click(function ()
+        {
+            var currentdate = new Date(); 
+            var Comment =
+            {  Author : $('#Author').val(),
+               Text   : $('#Text').val(),
+               Date   : currentdate
+
+            };
+            $(this).val('Please wait...');
+
+            $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("NewComment")',
+                 data: JSON.stringify(Comment),
+                 dataType: "JSON",
+                 contentType: "application/json",
+            },
+
+            function (data, status)
+            {
+              alert("Data: " + data + "\nStatus: " + status);
+            });
+
+
+        });
+    });
+
+</script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>

@@ -26,13 +26,24 @@ else
     <p> No comments </p>
 }
 
+
+
+
 @if (ViewBag.CanEdit)
 {
     @Html.ActionLink("Edit", "Edit", "Events", new { id = Model.Id },
-        new { @class = "btn btn-default" })
+                                 new { @class = "btn btn-default" })
     <span></span>
 
     @Html.ActionLink("Delete", "Delete", "Events", new { id = Model.Id },
-        new { @class = "btn btn-danger" })
+                                 new { @class = "btn btn-danger" })
 
+}
+
+@{
+    @Html.Partial("_CommentForm")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/ajax")
 }

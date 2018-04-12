@@ -1,24 +1,36 @@
 ﻿@model Events.Web.Models.EventInputModel
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+@{
+    var Location = Model.Location;
+    var Desciption = Model.Description;
+    var Title = Model.Title;
+    var Date = Model.StartDateTIme;
+    var Duration = Model.Duration;
+    bool Ispublic = Model.Ispublic;
+}
 
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" value="@Title" readonly class="form-control" />
+                @*@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StartDateTIme, htmlAttributes: new {  @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StartDateTIme, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDateTIme, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" value="@Date" readonly class="form-control" />
+                @*@Html.EditorFor(model => model.StartDateTIme, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.StartDateTIme, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +38,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" value="@Duration" readonly class="form-control" />
+                @*@Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +47,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" value="@ViewBag.id" readonly class="form-control" />
+                @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +56,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" value="@Location" readonly class="form-control" />
+                @*@Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,8 +74,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-                <@Html.ActionLink("Cancel", "My", null, htmlAttributes: new { @class = "btn" })>
+                @*<input type="submit" value="@ViewBag.id" class="btn btn-default" />*@
+                @Html.ActionLink("Delete", "Delete_post", new { id = @ViewBag.id }, htmlAttributes: new { @class = "btn btn-default" })
+                @Html.ActionLink("Cancel", "My", null, htmlAttributes: new { @class = "btn btn-danger" })
             </div>
         </div>
     </div>
