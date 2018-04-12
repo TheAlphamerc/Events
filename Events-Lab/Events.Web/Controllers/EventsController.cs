@@ -94,7 +94,7 @@ namespace Events.Web.Controllers
                 return this.RedirectToAction("My");
             }
             //  var model = EventInputModel.CreateFromEvent(eventToEdit);
-            if(model != null && this.ModelState.IsValid)
+            if (model != null && this.ModelState.IsValid)
             {
                 eventToEdit.Title = model.Title;
                 eventToEdit.StartDateTIme = model.StartDateTIme;
@@ -109,7 +109,61 @@ namespace Events.Web.Controllers
             }
             return this.View(model);
         }
-    }
 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+
+            var eventToEdit = this.LoadEvent(id);
+            if (eventToEdit == null)
+            {
+                this.AddNotification("Cannot edit event #" + id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+            var model = EventInputModel.CreateFromEvent(eventToEdit);
+            ViewBag.id = id;
+            return this.View(model);
+        }
+        
+        public ActionResult Delete_post(int id)
+        {
+            var eventTodelete = this.LoadEvent(id);
+            if (eventTodelete == null)
+            {
+                this.AddNotification("Cannot edit event #" + id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+            var model = EventInputModel.CreateFromEvent(eventTodelete);
+            if (eventTodelete != null)
+            {
+                this.db.Events.Remove(eventTodelete);
+                this.db.SaveChanges();
+                this.AddNotification("Event Deleted.", NotificationType.SUCCESS);
+                return this.RedirectToAction("My");
+            }
+            return this.RedirectToAction("My");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+       
    
 }
